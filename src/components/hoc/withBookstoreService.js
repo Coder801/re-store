@@ -1,4 +1,4 @@
-import React from "React";
+import React from "react";
 
 import { BookstoreConsumer } from "../bookstore-service-context";
 

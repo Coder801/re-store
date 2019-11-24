@@ -1,23 +1,18 @@
-import React, { Component } from "react";
+import React from "react";
 
-import ErrorIndicator from "../error-indicator";
-import ErrorBoundary from "../error-boundary";
-import { BookstoreProvider } from "../bookstore-service-context";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import BookstoreService from "../../services";
+import { HomePage, CardPage } from "../pages";
 
-export default class App extends Component {
-  bookstoreService = new BookstoreService();
-  render() {
-    return (
-      <BookstoreProvider value={this.bookstoreService}>
-        <ErrorBoundary>
-          <div>
-            <ErrorIndicator />
-            <h2>Hello!</h2>
-          </div>
-        </ErrorBoundary>
-      </BookstoreProvider>
-    );
-  }
-}
+const App = () => {
+  return (
+    <Router>
+      <Switch>
+        <Route path="/" exact component={HomePage} />
+        <Route path="/card" component={CardPage} />
+      </Switch>
+    </Router>
+  );
+};
+
+export default App;
