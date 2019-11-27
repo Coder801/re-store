@@ -1,27 +1,35 @@
 import {
-  BOOKS_REQUESTED,
-  BOOKS_LOADED,
-  BOOKS_REQUEST_ERROR
+  FETCH_BOOKS_REQUEST,
+  FETCH_BOOKS_SUCCESS,
+  FETCH_BOOKS_FAILURE
 } from "../constants/actionTypes";
 
-const booksLoaded = newBooks => {
+const fetchBooksSuccess = newBooks => {
   return {
-    type: BOOKS_LOADED,
+    type: FETCH_BOOKS_SUCCESS,
     payload: newBooks
   };
 };
 
-const booksRequested = () => {
+const fetchBooksRequest = () => {
   return {
-    type: BOOKS_REQUESTED
+    type: FETCH_BOOKS_REQUEST
   };
 };
 
-const booksRequestedError = error => {
+const fetchBooksFailure = error => {
   return {
-    type: BOOKS_REQUEST_ERROR,
+    type: FETCH_BOOKS_FAILURE,
     payload: error
   };
 };
 
-export { booksLoaded, booksRequested, booksRequestedError };
+const fetchBooks = (bookstoreService, dispatch) => () => {
+  dispatch(fetchBooksRequest());
+  bookstoreService
+    .getBooks()
+    .then(data => dispatch(fetchBooksSuccess(data)))
+    .catch(err => dispatch(fetchBooksFailure(err)));
+};
+
+export { fetchBooks };

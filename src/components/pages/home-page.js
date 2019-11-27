@@ -1,7 +1,6 @@
 import React from "react";
 
-import BookList from "../book-list";
-import Spinner from "../spinner";
+import BookListContainer from "../../containers/book-list-container";
 import {
   Container,
   Menu,
@@ -38,7 +37,7 @@ const HomePage = () => {
             <Header as="h2">Re Store</Header>
           </Menu.Item>
           <Menu.Item position="right">
-            <Header as="h4" content="5 Items ($20)">
+            <Header as="h4">
               <Icon name="shopping cart" /> 5 Items ($20)
             </Header>
           </Menu.Item>
@@ -46,7 +45,7 @@ const HomePage = () => {
       </Menu>
       <Container>
         <Card.Group itemsPerRow={4} style={{ padding: "5rem 0em 2rem" }}>
-          <BookList />
+          <BookListContainer />
         </Card.Group>
       </Container>
 
