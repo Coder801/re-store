@@ -2,7 +2,7 @@ import React from "react";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import { HomePage, CardPage } from "../pages";
+import { HomePage, CardPage } from "../../pages";
 
 const App = () => {
   return (

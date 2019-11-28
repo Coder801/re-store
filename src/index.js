@@ -2,8 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 
-import App from "./components/app";
-import ErrorBoundary from "./components/error-boundary";
+import App from "./components/App";
+import ErrorBoundary from "./components/ErrorBoundary";
 import { BookstoreProvider } from "./components/bookstore-service-context";
 
 import store from "./store";

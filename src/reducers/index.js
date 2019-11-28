@@ -8,6 +8,7 @@ const reducer = (state, action) => {
   switch (action.type) {
     case FETCH_BOOKS_REQUEST:
       return {
+        ...state,
         books: [],
         booksLoading: true,
         booksLoadingError: null
@@ -15,6 +16,7 @@ const reducer = (state, action) => {
 
     case FETCH_BOOKS_SUCCESS:
       return {
+        ...state,
         books: action.payload,
         booksLoading: false,
         booksLoadingError: null
@@ -22,6 +24,7 @@ const reducer = (state, action) => {
 
     case FETCH_BOOKS_FAILURE:
       return {
+        ...state,
         books: [],
         booksLoading: false,
         booksLoadingError: action.payload

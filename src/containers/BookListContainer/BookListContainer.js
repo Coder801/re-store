@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { compose } from "ramda";
-import Error from "../../components/error-indicator";
+import Error from "../../components/ErrorIndicator";
 
-import BookList from "../../components/book-list";
+import BookList from "../../components/BookList";
 import { withBookstoreService } from "../../components/hoc";
 import { fetchBooks } from "../../actions";
 

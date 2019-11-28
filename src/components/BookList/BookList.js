@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 
-import BookListItem from "../book-list-item";
+import BookListItem from "../BookListItem";
 
 const bookList = books =>
   books.map(book => <BookListItem key={book.id} book={book} />);
