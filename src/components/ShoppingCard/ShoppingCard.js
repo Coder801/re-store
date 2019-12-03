@@ -3,15 +3,15 @@ import { Header, Table, Button } from "semantic-ui-react";
 import { connect } from "react-redux";
 
 const CardRow = ({ item, actions }) => {
-  const { id, name, count, price } = item;
+  const { id, title, count, total } = item;
   const { onIncrease, onDecrease, onDelete } = actions;
 
   return (
     <Table.Row textAlign="center">
       <Table.Cell>{id}</Table.Cell>
-      <Table.Cell textAlign="left">{name}</Table.Cell>
+      <Table.Cell textAlign="left">{title}</Table.Cell>
       <Table.Cell>{count}</Table.Cell>
-      <Table.Cell>{price}</Table.Cell>
+      <Table.Cell>{total}</Table.Cell>
       <Table.Cell>
         <Button onClick={() => onIncrease(id)} color="green" icon="plus" />
         <Button onClick={() => onDecrease(id)} color="yellow" icon="minus" />

@@ -1,7 +1,8 @@
 import {
   FETCH_BOOKS_REQUEST,
   FETCH_BOOKS_SUCCESS,
-  FETCH_BOOKS_FAILURE
+  FETCH_BOOKS_FAILURE,
+  ADD_BOOKSITEM_SUCCESS
 } from "../constants/actionTypes";
 
 const fetchBooksSuccess = newBooks => {
@@ -32,4 +33,11 @@ const fetchBooks = (bookstoreService, dispatch) => () => {
     .catch(err => dispatch(fetchBooksFailure(err)));
 };
 
-export { fetchBooks };
+const addBookToCart = dispatch => bookId => {
+  dispatch({
+    type: ADD_BOOKSITEM_SUCCESS,
+    payload: bookId
+  });
+};
+
+export { fetchBooks, addBookToCart };

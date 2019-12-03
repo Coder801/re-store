@@ -2,18 +2,24 @@ import React, { Fragment } from "react";
 
 import BookListItem from "../BookListItem";
 
-const bookList = books =>
-  books.map(book => <BookListItem key={book.id} book={book} />);
+const bookList = ({ books, addBookToCart }) =>
+  books.map(book => (
+    <BookListItem
+      key={book.id}
+      book={book}
+      addBookToCart={() => addBookToCart(book.id)}
+    />
+  ));
 
-const bookListPreloader = count =>
+const bookListLoading = count =>
   Array(count)
     .fill(null)
     .map((item, key) => <BookListItem key={key} />);
 
-const BookList = ({ books, loading }) => {
-  const content = loading ? bookListPreloader(4) : bookList(books);
-
-  return <Fragment>{content}</Fragment>;
+const BookList = ({ loading, ...bookItem }) => {
+  return (
+    <Fragment>{loading ? bookListLoading(4) : bookList(bookItem)}</Fragment>
+  );
 };
 
 export default BookList;

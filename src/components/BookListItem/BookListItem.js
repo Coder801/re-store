@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, Image, Icon, Button } from "semantic-ui-react";
 import { Instagram, List } from "react-content-loader";
+import { connect } from "react-redux";
 
 const Placeholder = () => (
   <Card style={{ padding: "1rem" }}>
@@ -9,8 +10,8 @@ const Placeholder = () => (
   </Card>
 );
 
-const Item = ({ book }) => {
-  const { id, title, description, price, image } = book;
+const Item = ({ item }) => {
+  const { id, title, description, price, image } = item.book;
 
   return (
     <Card>
@@ -39,13 +40,15 @@ const Item = ({ book }) => {
           floated="right"
           size="large"
           content="Add"
+          onClick={item.addBookToCart}
         />
       </Card.Content>
     </Card>
   );
 };
 
-const BookListItem = ({ book }) =>
-  book ? <Item book={book} /> : <Placeholder />;
+const BookListItem = item => {
+  return item.book ? <Item item={item} /> : <Placeholder />;
+};
 
 export default BookListItem;

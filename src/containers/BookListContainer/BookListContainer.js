@@ -5,7 +5,7 @@ import Error from "../../components/ErrorIndicator";
 
 import BookList from "../../components/BookList";
 import { withBookstoreService } from "../../components/hoc";
-import { fetchBooks } from "../../actions";
+import { fetchBooks, addBookToCart } from "../../actions";
 
 class BookListContainer extends Component {
   componentDidMount() {
@@ -13,7 +13,12 @@ class BookListContainer extends Component {
   }
 
   render() {
-    const { books, booksLoading, booksLoadingError } = this.props;
+    const {
+      books,
+      booksLoading,
+      booksLoadingError,
+      addBookToCart
+    } = this.props;
 
     if (booksLoading) {
       return <BookList loading />;
@@ -24,7 +29,7 @@ class BookListContainer extends Component {
     }
 
     if (!booksLoading && !booksLoadingError) {
-      return <BookList books={books} />;
+      return <BookList books={books} addBookToCart={addBookToCart} />;
     }
   }
 }
@@ -36,7 +41,8 @@ const mapStateToProps = ({ books, booksLoading, booksLoadingError }) => ({
 });
 
 const mapDispatchToProps = (dispatch, { bookstoreService }) => ({
-  fetchBooks: fetchBooks(bookstoreService, dispatch)
+  fetchBooks: fetchBooks(bookstoreService, dispatch),
+  addBookToCart: addBookToCart(dispatch)
 });
 
 export default compose(
