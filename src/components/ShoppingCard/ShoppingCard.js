@@ -1,5 +1,10 @@
 import React from "react";
 import { Header, Table, Button } from "semantic-ui-react";
+import {
+  increaseBookItem,
+  decreaseBookItem,
+  deleteBookItem
+} from "../../actions";
 import { connect } from "react-redux";
 
 const CardRow = ({ item, actions }) => {
@@ -55,17 +60,11 @@ const mapStateToProps = ({ cardItems, orderTotal }) => ({
   total: orderTotal
 });
 
-const mapDispatchToProps = () => {
+const mapDispatchToProps = dispatch => {
   return {
-    onIncrease: id => {
-      console.log(`Increase ${id}`);
-    },
-    onDecrease: id => {
-      console.log(`Decrease ${id}`);
-    },
-    onDelete: id => {
-      console.log(`Delete ${id}`);
-    }
+    onIncrease: id => dispatch(increaseBookItem(id)),
+    onDecrease: id => dispatch(decreaseBookItem(id)),
+    onDelete: id => dispatch(deleteBookItem(id))
   };
 };
 

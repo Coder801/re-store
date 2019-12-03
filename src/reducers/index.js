@@ -2,20 +2,36 @@ import {
   FETCH_BOOKS_REQUEST,
   FETCH_BOOKS_SUCCESS,
   FETCH_BOOKS_FAILURE,
-  ADD_BOOKSITEM_SUCCESS
+  INCREASE_BOOK_ITEM,
+  DECREASE_BOOK_ITEM,
+  DELETE_BOOK_ITEM,
+  ADD_BOOK_ITEM
 } from "../constants/actionTypes";
 
-const setOrUpdateItem = (array, item, existItem = {}) => {
-  const { id = item.id, title = item.title, count = 0, total = 0 } = existItem;
+const updateItemCount = (array, id, operand = 1) =>
+  array.map(item => {
+    const { count, price } = item;
+    const updatedCount = count + operand;
 
-  const newItem = {
-    id,
-    title,
-    count: count + 1,
-    total: total + item.price
-  };
+    return item.id === id
+      ? { ...item, count: updatedCount, total: price * updatedCount }
+      : item;
+  });
 
-  return [...array, newItem];
+const deteteItem = (array, id) => array.filter(item => item.id !== id);
+
+const addItem = (array, item) => {
+  const { id, title, price } = item;
+  return [
+    ...array,
+    {
+      id,
+      title,
+      price,
+      total: price,
+      count: 1
+    }
+  ];
 };
 
 const reducer = (state, action) => {
@@ -44,17 +60,51 @@ const reducer = (state, action) => {
         booksLoadingError: action.payload
       };
 
-    case ADD_BOOKSITEM_SUCCESS: {
+    case ADD_BOOK_ITEM: {
       const bookId = action.payload;
       const { books, cardItems } = state;
       const book = books.find(({ id }) => bookId === id);
       const bookInCard = cardItems.find(({ id }) => bookId === id);
 
-      console.log(book);
+      return {
+        ...state,
+        cardItems: bookInCard
+          ? updateItemCount(cardItems, bookId)
+          : addItem(cardItems, book)
+      };
+    }
+
+    case INCREASE_BOOK_ITEM: {
+      const bookId = action.payload;
+      const { cardItems } = state;
 
       return {
         ...state,
-        cardItems: setOrUpdateItem(cardItems, book, bookInCard)
+        cardItems: updateItemCount(cardItems, bookId)
+      };
+    }
+
+    case DECREASE_BOOK_ITEM: {
+      const bookId = action.payload;
+      const { cardItems } = state;
+      const bookInCard = cardItems.find(({ id }) => bookId === id);
+
+      return {
+        ...state,
+        cardItems:
+          bookInCard.count >= 2
+            ? updateItemCount(cardItems, bookId, -1)
+            : deteteItem(cardItems, bookId)
+      };
+    }
+
+    case DELETE_BOOK_ITEM: {
+      const bookId = action.payload;
+      const { cardItems } = state;
+
+      return {
+        ...state,
+        cardItems: deteteItem(cardItems, bookId)
       };
     }
 

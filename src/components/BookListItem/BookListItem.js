@@ -1,7 +1,6 @@
 import React from "react";
 import { Card, Image, Icon, Button } from "semantic-ui-react";
 import { Instagram, List } from "react-content-loader";
-import { connect } from "react-redux";
 
 const Placeholder = () => (
   <Card style={{ padding: "1rem" }}>

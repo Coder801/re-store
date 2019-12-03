@@ -2,28 +2,40 @@ import {
   FETCH_BOOKS_REQUEST,
   FETCH_BOOKS_SUCCESS,
   FETCH_BOOKS_FAILURE,
-  ADD_BOOKSITEM_SUCCESS
+  INCREASE_BOOK_ITEM,
+  DECREASE_BOOK_ITEM,
+  ADD_BOOK_ITEM,
+  DELETE_BOOK_ITEM
 } from "../constants/actionTypes";
 
-const fetchBooksSuccess = newBooks => {
-  return {
-    type: FETCH_BOOKS_SUCCESS,
-    payload: newBooks
-  };
-};
+const fetchBooksSuccess = newBooks => ({
+  type: FETCH_BOOKS_SUCCESS,
+  payload: newBooks
+});
 
-const fetchBooksRequest = () => {
-  return {
-    type: FETCH_BOOKS_REQUEST
-  };
-};
+const fetchBooksRequest = () => ({
+  type: FETCH_BOOKS_REQUEST
+});
 
-const fetchBooksFailure = error => {
-  return {
-    type: FETCH_BOOKS_FAILURE,
-    payload: error
-  };
-};
+const fetchBooksFailure = error => ({
+  type: FETCH_BOOKS_FAILURE,
+  payload: error
+});
+
+const increaseBookItem = bookId => ({
+  type: INCREASE_BOOK_ITEM,
+  payload: bookId
+});
+
+const decreaseBookItem = bookId => ({
+  type: DECREASE_BOOK_ITEM,
+  payload: bookId
+});
+
+const deleteBookItem = bookId => ({
+  type: DELETE_BOOK_ITEM,
+  payload: bookId
+});
 
 const fetchBooks = (bookstoreService, dispatch) => () => {
   dispatch(fetchBooksRequest());
@@ -35,9 +47,15 @@ const fetchBooks = (bookstoreService, dispatch) => () => {
 
 const addBookToCart = dispatch => bookId => {
   dispatch({
-    type: ADD_BOOKSITEM_SUCCESS,
+    type: ADD_BOOK_ITEM,
     payload: bookId
   });
 };
 
-export { fetchBooks, addBookToCart };
+export {
+  fetchBooks,
+  addBookToCart,
+  increaseBookItem,
+  decreaseBookItem,
+  deleteBookItem
+};
