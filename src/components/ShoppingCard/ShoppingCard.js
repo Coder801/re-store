@@ -55,17 +55,15 @@ const ShoppingCard = ({ total, items, ...actions }) => {
   );
 };
 
-const mapStateToProps = ({ cardItems, orderTotal }) => ({
+const mapStateToProps = ({ shopingCard: { cardItems, orderTotal } }) => ({
   items: cardItems,
   total: orderTotal
 });
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onIncrease: id => dispatch(increaseBookItem(id)),
-    onDecrease: id => dispatch(decreaseBookItem(id)),
-    onDelete: id => dispatch(deleteBookItem(id))
-  };
+const mapDispatchToProps = {
+  onIncrease: increaseBookItem,
+  onDecrease: decreaseBookItem,
+  onDelete: deleteBookItem
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCard);

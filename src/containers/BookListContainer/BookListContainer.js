@@ -1,6 +1,6 @@
 import React, { Component } from "react";
+import { compose } from "redux";
 import { connect } from "react-redux";
-import { compose } from "ramda";
 import Error from "../../components/ErrorIndicator";
 
 import BookList from "../../components/BookList";
@@ -34,7 +34,9 @@ class BookListContainer extends Component {
   }
 }
 
-const mapStateToProps = ({ books, booksLoading, booksLoadingError }) => ({
+const mapStateToProps = ({
+  booklist: { books, booksLoading, booksLoadingError }
+}) => ({
   books,
   booksLoading,
   booksLoadingError
